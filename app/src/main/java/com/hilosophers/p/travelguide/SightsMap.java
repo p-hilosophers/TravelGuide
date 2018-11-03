@@ -77,7 +77,7 @@ public class SightsMap extends FragmentActivity implements OnMapReadyCallback {
             .title(s.getName()));
 
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(s1.getLat(),s1.getLog()) ));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(s1.getLat(),s1.getLog()) ));
         /*Marker m1 = googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(38.609556, -1.139637))
                 .anchor(0.5f, 0.5f)
