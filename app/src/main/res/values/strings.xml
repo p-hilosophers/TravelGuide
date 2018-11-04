@@ -1,3 +1,11 @@
 <resources>
+
+
     <string name="app_name">TravelGuide</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="cities">
+        <item>Choose a city</item>
+        <item>London</item>
+
+    </string-array>
 </resources>
