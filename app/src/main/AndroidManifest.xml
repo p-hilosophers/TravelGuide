@@ -33,9 +33,13 @@
             android:value="@string/google_maps_key" />
 
 
-        <activity
-            android:name=".SightsMap"
-            android:label="@string/title_activity_sights_map" />
+        <activity android:name=".SightsMap"
+
+            android:label="@string/title_activity_sights_map"
+
+
+
+            />
 
         <activity android:name=".MainActivity">
             <intent-filter>
