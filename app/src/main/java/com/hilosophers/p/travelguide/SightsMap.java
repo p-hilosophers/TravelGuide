@@ -31,7 +31,8 @@ public class SightsMap extends FragmentActivity implements OnMapReadyCallback {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sights_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -83,14 +84,7 @@ public class SightsMap extends FragmentActivity implements OnMapReadyCallback {
                 .anchor(0.5f, 0.5f)
                 .title("Title1")
                 .alpha(0.7f)//opacity
-                .snippet("Snippet1"));//added information
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.addMarker(new MarkerOptions().position(Berlin).title("Hola"));
-        mMap.addMarker(new MarkerOptions().position(Bogota).title("Hola"));*/
+                .snippet("Snippet1"));//added information*/
     }
 
 

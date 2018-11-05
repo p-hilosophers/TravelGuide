@@ -1,6 +1,7 @@
 package com.hilosophers.p.travelguide;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,26 +9,25 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
 {
-    private Button button;
+    private static int SPLASH_TIME_OUT = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-
-                button = findViewById(R.id.button);
-                button.setOnClickListener(new View.OnClickListener() {
+            new Handler().postDelayed(new Runnable()
+            {
                 @Override
-                    public void onClick(View v)
+                public void run()
                 {
-                        openMap();
+                    Intent homeIntent = new Intent(MainActivity.this,SightsMap.class);
+                    startActivity(homeIntent);
+                    finish();
                 }
-        });
+            },SPLASH_TIME_OUT);
+
+
     }
 
-             public void openMap()
-             {
-                Intent intent = new Intent(this,SightsMap.class);
-                startActivity(intent);
-             }
+
 }
