@@ -1,7 +1,10 @@
 package com.hilosophers.p.travelguide.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,7 +36,7 @@ public class CityActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.city_listview);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.3:8080/")
+                .baseUrl("http://192.168.1.6:8080/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -58,6 +61,16 @@ public class CityActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<City>> call, Throwable t) {
                 Toast.makeText(CityActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CityActivity.this,SightsMap.class);
+                intent.putExtra("cityName",listView.getItemAtPosition(position).toString());
+                startActivity(intent);
             }
         });
     }
