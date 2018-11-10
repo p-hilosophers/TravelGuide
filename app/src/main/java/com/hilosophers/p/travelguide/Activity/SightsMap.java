@@ -1,8 +1,5 @@
-package com.hilosophers.p.travelguide;
+package com.hilosophers.p.travelguide.Activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -14,10 +11,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hilosophers.p.travelguide.Model.Sight;
+import com.hilosophers.p.travelguide.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,21 +60,21 @@ public class SightsMap extends FragmentActivity implements OnMapReadyCallback {
         }*/
 
 
-    Sights s1 = new Sights(51.508530, -0.076132,"Tower Of London");
-    Sights s2 = new Sights(51.501476, -0.140634,"Buckingham Palace");
-        List<Sights> sightlist = new ArrayList<>();
+    Sight s1 = new Sight("Tower Of London",51.508530, -0.076132);
+    Sight s2 = new Sight("Buckingham Palace",51.501476, -0.140634);
+        List<Sight> sightlist = new ArrayList<>();
         sightlist.add(s1);
         sightlist.add(s2);
         Marker marker;
-        for (Sights s:sightlist)
+        for (Sight s:sightlist)
         {
 
             marker = googleMap.addMarker(new MarkerOptions()
-            .position(new LatLng(s.getLat(),s.getLog()))
+            .position(new LatLng(s.getLatitude(),s.getLongitude()))
             .title(s.getName()));
 
         }
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(s1.getLat(),s1.getLog()) ));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(s1.getLatitude(),s1.getLongitude()) ));
         /*Marker m1 = googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(38.609556, -1.139637))
                 .anchor(0.5f, 0.5f)
