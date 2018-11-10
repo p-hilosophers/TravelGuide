@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CityActivity extends AppCompatActivity {
 
     private List<String> names = new ArrayList<>();
+    private List<String> photos = new ArrayList<>();
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,6 +49,7 @@ public class CityActivity extends AppCompatActivity {
                 for(City city: repos)
                 {
                     names.add(city.getName());
+                    photos.add(city.getPhoto());
                 }
                 customListView = new CustomListView(CityActivity.this,names);
                 listView.setAdapter(customListView);

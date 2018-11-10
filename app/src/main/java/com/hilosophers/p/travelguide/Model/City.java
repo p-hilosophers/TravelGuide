@@ -18,23 +18,20 @@ public class City {
     @SerializedName("latitude")
     private double latitude;
 
+    @SerializedName("photo")
+    private String photo;
+
     @SerializedName("photoCount")
     private int photoCount;
 
     public City(){}
 
-    public City(UUID cityId, String name, double longitude, double latitude, int photoCount) {
+    public City(UUID cityId, String name, double longitude, double latitude, String photo, int photoCount) {
         this.cityId = cityId;
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.photoCount = photoCount;
-    }
-
-    public City(String name, double longitude, double latitude, int photoCount) {
-        this.name = name;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.photo = photo;
         this.photoCount = photoCount;
     }
 
@@ -76,5 +73,13 @@ public class City {
 
     public void setPhotoCount(int photoCount) {
         this.photoCount = photoCount;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
