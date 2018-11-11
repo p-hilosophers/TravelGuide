@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hilosophers.p.travelguide.Model.City;
@@ -74,23 +77,26 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             @Override
             public void onResponse(Call<List<Sight>> call, Response<List<Sight>> response) {
 
-
+                Marker marker;
                 List<Sight> repos = response.body();
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for(Sight sight: repos)
                 {
                     sightlist.add(sight);
-                    googleMap.addMarker(new MarkerOptions()
+                    marker = googleMap.addMarker(new MarkerOptions()
                             .position(new LatLng(sight.getLatitude(),sight.getLongitude()))
                             .title(sight.getName()));
+                    builder.include(marker.getPosition());
                 }
                 LatLng city = new LatLng(sightlist.get(0).getCity().getLatitude(),sightlist.get(0).getCity().getLongitude());
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(city));
-/*
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(sightlist.get(0).getCity().getLatitude(),sightlist.get(0).getCity().getLongitude()) ));
-*/
+
+
+                LatLngBounds bounds = builder.build();
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,5);
+                mMap.moveCamera(cu);
+                mMap.animateCamera(cu);
 
                 Toast.makeText(SightActivity.this, "in response", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
