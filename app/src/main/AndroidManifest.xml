@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,7 +33,7 @@
             android:value="@string/google_maps_key" />
 
 
-        <activity android:name=".Activity.SightsMap"
+        <activity android:name=".Activity.SightActivity"
 
             android:label="@string/title_activity_sights_map"
 
