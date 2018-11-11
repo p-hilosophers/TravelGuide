@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.hilosophers.p.travelguide.Adapter.CustomListView;
-import com.hilosophers.p.travelguide.CityClient;
+import com.hilosophers.p.travelguide.Repository.CityClient;
 import com.hilosophers.p.travelguide.Model.City;
 import com.hilosophers.p.travelguide.R;
 
@@ -36,7 +36,7 @@ public class CityActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.city_listview);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.6:8080/")
+                .baseUrl("http://192.168.1.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -54,7 +54,7 @@ public class CityActivity extends AppCompatActivity {
                     names.add(city.getName());
                     photos.add(city.getPhoto());
                 }
-                customListView = new CustomListView(CityActivity.this,names);
+                customListView = new CustomListView(CityActivity.this,names,photos);
                 listView.setAdapter(customListView);
             }
 
@@ -68,7 +68,7 @@ public class CityActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CityActivity.this,SightsMap.class);
+                Intent intent = new Intent(CityActivity.this,SightActivity.class);
                 intent.putExtra("cityName",listView.getItemAtPosition(position).toString());
                 startActivity(intent);
             }

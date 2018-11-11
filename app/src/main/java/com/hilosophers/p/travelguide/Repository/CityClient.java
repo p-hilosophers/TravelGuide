@@ -1,4 +1,4 @@
-package com.hilosophers.p.travelguide;
+package com.hilosophers.p.travelguide.Repository;
 
 import com.hilosophers.p.travelguide.Model.City;
 
