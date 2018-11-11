@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hilosophers.p.travelguide.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,15 +18,15 @@ import java.util.List;
 public class CustomListView extends ArrayAdapter<String> {
 
     private List<String> names;
-    private Integer[] img;
+    private List<String> img;
     private Activity context;
 
-    public CustomListView(Activity context,List<String> names) {
+    public CustomListView(Activity context,List<String> names,List<String> img) {
         super(context, R.layout.city_listview,names);
 
         this.context = context;
         this.names = names;
-        /*this.img = img;*/
+        this.img = img;
     }
 
 
@@ -47,7 +48,11 @@ public class CustomListView extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) r.getTag();
         }
 
-        /*viewHolder.imageView.setImageResource(img[position]);*/
+
+        Picasso.with(context).load(img.get(position))
+                .resize(150,200)
+                .centerCrop()
+                .into(viewHolder.imageView);
         viewHolder.textView.setText(names.get(position));
         return r;
     }
@@ -56,12 +61,12 @@ public class CustomListView extends ArrayAdapter<String> {
     class ViewHolder
     {
         TextView textView;
-       /* ImageView imageView;*/
+       ImageView imageView;
 
         ViewHolder(View v)
         {
             textView = (TextView) v.findViewById(R.id.textView);
-            /*imageView = (ImageView) v.findViewById(R.id.imageView);*/
+            imageView = (ImageView) v.findViewById(R.id.imageView);
         }
     }
 }

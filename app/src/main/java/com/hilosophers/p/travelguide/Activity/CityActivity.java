@@ -54,7 +54,7 @@ public class CityActivity extends AppCompatActivity {
                     names.add(city.getName());
                     photos.add(city.getPhoto());
                 }
-                customListView = new CustomListView(CityActivity.this,names);
+                customListView = new CustomListView(CityActivity.this,names,photos);
                 listView.setAdapter(customListView);
             }
 
