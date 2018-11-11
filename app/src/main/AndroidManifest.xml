@@ -9,6 +9,7 @@
     -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -35,6 +36,7 @@
 
 
 
+
         <activity android:name=".Activity.SightActivity"
 
             android:label="@string/title_activity_sights_map"
@@ -49,9 +51,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".Activity.CityActivity"/>
+        <activity android:name=".Activity.CityActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
     </application>
 
 </manifest>
