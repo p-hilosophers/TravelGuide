@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void run()
                 {
-                    Intent homeIntent = new Intent(MainActivity.this,CityActivity.class);
+                    Intent homeIntent = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(homeIntent);
                     finish();
                 }
