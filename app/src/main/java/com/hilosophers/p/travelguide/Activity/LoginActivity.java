@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
-                    Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.1.2:8181/").addConverterFactory(GsonConverterFactory.create());
+                    Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.0.3:8080/").addConverterFactory(GsonConverterFactory.create());
                     Retrofit retrofit = builder.build();
                     UserClient client = retrofit.create(UserClient.class);
                     Call<User> call = client.userLogin(email.getText().toString(), EncryptService.encryptPassword(password.getText().toString()));
