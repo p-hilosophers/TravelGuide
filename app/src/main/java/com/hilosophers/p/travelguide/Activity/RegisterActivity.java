@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void sendNetworkRequest(User user) {
         final TextView text = findViewById(R.id.text);
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.1.2:8181/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.0.3:8080/").addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);
