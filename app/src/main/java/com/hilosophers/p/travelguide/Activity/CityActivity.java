@@ -36,7 +36,7 @@ public class CityActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.city_listview);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.13:8080/")
+                .baseUrl("http://83.212.103.26:8080/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();

@@ -3,6 +3,8 @@ package com.hilosophers.p.travelguide.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -11,12 +13,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.hilosophers.p.travelguide.Model.City;
 import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
@@ -35,6 +35,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
+    private Button showRoutesBtn;
     private String city;
     private  Intent intent;
 
@@ -47,10 +48,19 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
 
+        showRoutesBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SightActivity.this,RouteActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
 
     /**
      * Manipulates the map once available.
@@ -66,7 +76,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.13:8080/")
+                .baseUrl("http://83.212.103.26:8080/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -105,7 +115,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-
     }
+
 
 }
