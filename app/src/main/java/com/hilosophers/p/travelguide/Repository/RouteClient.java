@@ -6,9 +6,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface RouteClient {
 
-    @GET("/cities/")
-    Call<List<List<Sight>>> repoForRoutes();
+    @GET("/routes/{cityName}")
+    Call<List<List<Sight>>> repoForRoutes(@Path("cityName") String cityName);
 }
