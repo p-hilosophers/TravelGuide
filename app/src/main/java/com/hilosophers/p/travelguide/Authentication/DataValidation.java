@@ -1,4 +1,4 @@
-package com.hilosophers.p.travelguide;
+package com.hilosophers.p.travelguide.Authentication;
 
 public class DataValidation {
     private String message="";

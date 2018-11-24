@@ -9,10 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hilosophers.p.travelguide.EncryptService;
+import com.hilosophers.p.travelguide.Authentication.EncryptService;
 import com.hilosophers.p.travelguide.Model.User;
 import com.hilosophers.p.travelguide.R;
-import com.hilosophers.p.travelguide.UserClient;
+import com.hilosophers.p.travelguide.Repository.UserClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
-                    Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.0.3:8080/").addConverterFactory(GsonConverterFactory.create());
+                    Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://83.212.103.26:8081/").addConverterFactory(GsonConverterFactory.create());
                     Retrofit retrofit = builder.build();
                     UserClient client = retrofit.create(UserClient.class);
                     Call<User> call = client.userLogin(email.getText().toString(), EncryptService.encryptPassword(password.getText().toString()));

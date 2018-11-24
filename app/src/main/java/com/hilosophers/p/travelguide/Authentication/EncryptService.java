@@ -1,4 +1,4 @@
-package com.hilosophers.p.travelguide;
+package com.hilosophers.p.travelguide.Authentication;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

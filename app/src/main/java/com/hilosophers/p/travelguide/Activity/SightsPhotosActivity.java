@@ -33,14 +33,10 @@ public class SightsPhotosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photos);
         intent = getIntent();
         sight = intent.getStringExtra("sightName");
-
-
-
-
-        listView = (ListView) findViewById(R.id.sights_photos);
+        listView = findViewById(R.id.sights_photos);
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.3:8080/")
+                .baseUrl("http://83.212.103.26:8081//")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -64,12 +60,9 @@ public class SightsPhotosActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Photo>> call, Throwable t) {
-                Toast.makeText(SightsPhotosActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SightsPhotosActivity.this,"Something sent wrong ,please re-try later...",Toast.LENGTH_SHORT).show();
             }
         });
-
-
-            }
-
     }
+}
 
