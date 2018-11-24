@@ -1,5 +1,8 @@
 package com.hilosophers.p.travelguide.Repository;
 
+import android.provider.ContactsContract;
+
+import com.hilosophers.p.travelguide.Model.Photo;
 import com.hilosophers.p.travelguide.Model.Sight;
 
 import java.util.List;
@@ -12,4 +15,8 @@ public interface SightClient {
 
     @GET("/cities/{city}/sights")
     Call<List<Sight>> repoForSights(@Path("city") String city);
+
+    @GET("sights/{sight}/photos")
+    Call<List<Photo>> repoForPhotos(@Path("sight") String sight );
+
 }

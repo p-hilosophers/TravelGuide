@@ -5,6 +5,9 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -55,6 +58,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this,RouteActivity.class);
+                intent.putExtra("cityName",city);
                 startActivity(intent);
             }
         });
@@ -76,7 +80,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://83.212.103.26:8080/")
+                .baseUrl("http://83.212.103.26:8081/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -115,7 +119,20 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent = new Intent(SightActivity.this,SightsPhotosActivity.class);
+                intent.putExtra("sightName",marker.getTitle());
+                startActivity(intent);
+                return true;
+            }
+        });
+
     }
-
-
 }
+
+
+
+
