@@ -12,6 +12,7 @@ import com.hilosophers.p.travelguide.Adapter.CustomListView;
 import com.hilosophers.p.travelguide.Repository.CityClient;
 import com.hilosophers.p.travelguide.Model.City;
 import com.hilosophers.p.travelguide.R;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CityActivity extends AppCompatActivity {
 
@@ -35,11 +35,9 @@ public class CityActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.city_listview);
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://83.212.103.26:8081/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
+        Retrofit retrofit = RequestService.initializeRequest().build();
+
         CityClient client = retrofit.create(CityClient.class);
         Call<List<City>> call = client.repoForCity();
 
