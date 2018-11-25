@@ -13,12 +13,12 @@ import com.hilosophers.p.travelguide.Authentication.DataValidation;
 import com.hilosophers.p.travelguide.Model.User;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.UserClient;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -64,8 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void sendNetworkRequest(User user) {
         final TextView text = findViewById(R.id.text);
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://83.212.103.26:8081/").addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
+        Retrofit retrofit = RequestService.initializeRequest().build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);
 

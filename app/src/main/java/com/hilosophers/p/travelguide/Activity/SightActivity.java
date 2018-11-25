@@ -5,9 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -23,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SightActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -79,11 +76,9 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady( final GoogleMap googleMap) {
         mMap = googleMap;
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://83.212.103.26:8081/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
+
+        Retrofit retrofit = RequestService.initializeRequest().build();
         SightClient client = retrofit.create(SightClient.class);
         Call<List<Sight>> call = client.repoForSights(city);
 
@@ -119,7 +114,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-
+/*
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -128,7 +123,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 startActivity(intent);
                 return true;
             }
-        });
+        });*/
 
     }
 }

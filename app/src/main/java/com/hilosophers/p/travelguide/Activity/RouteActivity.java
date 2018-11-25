@@ -3,8 +3,6 @@ package com.hilosophers.p.travelguide.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,6 +10,7 @@ import com.hilosophers.p.travelguide.Adapter.RoutesCustomAdapter;
 import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.RouteClient;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RouteActivity extends AppCompatActivity {
 
@@ -28,7 +26,7 @@ public class RouteActivity extends AppCompatActivity {
     private List<String> routes = new ArrayList<>();
     private String city;
     private Intent intent;
-    private String route = null;
+    private String route ="" ;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState)
@@ -41,11 +39,8 @@ public class RouteActivity extends AppCompatActivity {
         city = intent.getStringExtra("cityName");
 
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://83.212.103.26:8081/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
+        Retrofit retrofit = RequestService.initializeRequest().build();
         RouteClient client = retrofit.create(RouteClient.class);
         Call<List<List<Sight>>> call = client.repoForRoutes(city);
 
@@ -56,6 +51,7 @@ public class RouteActivity extends AppCompatActivity {
                 List<List<Sight>> repos = response.body();
                 
                     for(List<Sight> sightItem:repos) {
+                        route = "";
                         for (int i =0;i<sightItem.size();i++) {
                          route +=sightItem.get(i).getName()+", ";
                         }
