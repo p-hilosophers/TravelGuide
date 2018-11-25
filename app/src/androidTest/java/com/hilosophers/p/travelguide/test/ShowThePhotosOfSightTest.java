@@ -1,4 +1,4 @@
-package com.hilosophers.p.travelguide.Activity;
+package com.hilosophers.p.travelguide.test;
 
 
 import android.support.test.espresso.DataInteraction;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.hilosophers.p.travelguide.Activity.MainActivity;
 import com.hilosophers.p.travelguide.R;
 
 import org.hamcrest.Description;
