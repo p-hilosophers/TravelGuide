@@ -60,12 +60,12 @@ public class DataValidation {
 
         if(service.checkIfNameIsNull(textName)){
             allClear = false;
-            checkWarningStatus("Name field is empty...");
+            checkWarningStatus("The name field is empty !");
         }
 
         if(service.checkIfSurnameIsNull(textSurname)){
             allClear = false;
-            checkWarningStatus("Surname field is empty...");
+            checkWarningStatus("The surname field is empty !");
         }
 
         if(service.checkIfPasswordIsNull(textPassword)) {
@@ -77,13 +77,13 @@ public class DataValidation {
         if(!service.checkIfPasswordsMatch(textPassword,textConPassword)) {
             allClear = false;
             matchCode = 1;
-            checkWarningStatus("Passwords do not match !");
+            checkWarningStatus("Password fields do not match !");
         }
 
         if(!service.checkIfPasswordIsStrong(textPassword)){
             allClear = false;
             if(passCode != 1 && matchCode !=1){
-                checkWarningStatus("Your password is weak...");}
+                checkWarningStatus("The inserted password must be at least 6 characters long");}
         }
 
         if(!service.checkIfEmailIsValid(textEmail)){
