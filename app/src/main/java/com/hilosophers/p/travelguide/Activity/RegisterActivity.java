@@ -1,6 +1,7 @@
 package com.hilosophers.p.travelguide.Activity;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     sendNetworkRequest(user);
                 }else{
-                    Toast.makeText(RegisterActivity.this, dataVal.checkWarningStatus(""),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, dataVal.checkWarningStatus(""),Toast.LENGTH_LONG).show();
                     dataVal.clearMessage();
                 }
             }
@@ -64,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void sendNetworkRequest(User user) {
         final TextView text = findViewById(R.id.text);
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.1.2:8181/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://83.212.103.26:8080/").addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);
@@ -73,11 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(RegisterActivity.this, "You " + response.body().getName() + " successfully made an account !", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Something went wrong .", Toast.LENGTH_SHORT).show();
             }
         });
     }
