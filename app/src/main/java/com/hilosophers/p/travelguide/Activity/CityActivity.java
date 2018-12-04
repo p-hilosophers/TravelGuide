@@ -9,9 +9,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.hilosophers.p.travelguide.Adapter.CustomListView;
-import com.hilosophers.p.travelguide.CityClient;
+import com.hilosophers.p.travelguide.Repository.CityClient;
 import com.hilosophers.p.travelguide.Model.City;
 import com.hilosophers.p.travelguide.R;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CityActivity extends AppCompatActivity {
 
@@ -33,13 +33,11 @@ public class CityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
 
-        listView = (ListView) findViewById(R.id.city_listview);
+        listView = findViewById(R.id.city_listview);
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.6:8080/")
-                .addConverterFactory(GsonConverterFactory.create());
 
-        Retrofit retrofit = builder.build();
+        Retrofit retrofit = RequestService.initializeRequest().build();
+
         CityClient client = retrofit.create(CityClient.class);
         Call<List<City>> call = client.repoForCity();
 
@@ -54,7 +52,7 @@ public class CityActivity extends AppCompatActivity {
                     names.add(city.getName());
                     photos.add(city.getPhoto());
                 }
-                customListView = new CustomListView(CityActivity.this,names);
+                customListView = new CustomListView(CityActivity.this,names,photos);
                 listView.setAdapter(customListView);
             }
 
@@ -68,7 +66,7 @@ public class CityActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CityActivity.this,SightsMap.class);
+                Intent intent = new Intent(CityActivity.this,SightActivity.class);
                 intent.putExtra("cityName",listView.getItemAtPosition(position).toString());
                 startActivity(intent);
             }

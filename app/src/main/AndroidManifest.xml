@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hilosophers.p.travelguide">
 
     <!--
@@ -7,14 +8,14 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -31,10 +32,10 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBKfRI_wCAqT9ucxtJfRKTBxsWXsoxH1g0" />
 
         <activity
-            android:name=".Activity.SightsMap"
+            android:name=".Activity.SightActivity"
             android:label="@string/title_activity_sights_map" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
@@ -46,6 +47,8 @@
         <activity android:name=".Activity.CityActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.RouteActivity"/>
+        <activity android:name=".Activity.SightsPhotosActivity"></activity>
     </application>
 
 </manifest>

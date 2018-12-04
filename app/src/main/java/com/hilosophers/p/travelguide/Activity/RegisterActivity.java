@@ -1,7 +1,6 @@
 package com.hilosophers.p.travelguide.Activity;
 
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hilosophers.p.travelguide.DataValidation;
+import com.hilosophers.p.travelguide.Authentication.DataValidation;
 import com.hilosophers.p.travelguide.Model.User;
 import com.hilosophers.p.travelguide.R;
-import com.hilosophers.p.travelguide.UserClient;
+import com.hilosophers.p.travelguide.Repository.UserClient;
+import com.hilosophers.p.travelguide.Services.RequestService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     sendNetworkRequest(user);
                 }else{
-                    Toast.makeText(RegisterActivity.this, dataVal.checkWarningStatus(""),Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, dataVal.checkWarningStatus(""),Toast.LENGTH_SHORT).show();
                     dataVal.clearMessage();
                 }
             }
@@ -65,8 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void sendNetworkRequest(User user) {
         final TextView text = findViewById(R.id.text);
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://83.212.103.26:8080/").addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
+        Retrofit retrofit = RequestService.initializeRequest().build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);
 
@@ -79,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, "Something went wrong .", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -6,27 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hilosophers.p.travelguide.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-
-public class CustomListView extends ArrayAdapter<String> {
+public class RoutesCustomAdapter extends ArrayAdapter<String> {
 
     private List<String> names;
-    private List<String> img;
     private Activity context;
 
-    public CustomListView(Activity context,List<String> names,List<String> img) {
-        super(context, R.layout.city_listview,names);
+    public RoutesCustomAdapter(Activity context, List<String> names) {
+        super(context, R.layout.routes_listview,names);
 
         this.context = context;
         this.names = names;
-        this.img = img;
     }
 
 
@@ -35,24 +30,19 @@ public class CustomListView extends ArrayAdapter<String> {
     public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent)
     {
         View r = convertView;
-        ViewHolder viewHolder = null;
+        RoutesCustomAdapter.ViewHolder viewHolder = null;
         if(r == null) {
 
             LayoutInflater layoutInflater = context.getLayoutInflater();
-            r = layoutInflater.inflate(R.layout.city_listview, null, true);
-            viewHolder = new ViewHolder(r);
+            r = layoutInflater.inflate(R.layout.routes_listview, null, true);
+            viewHolder = new RoutesCustomAdapter.ViewHolder(r);
             r.setTag(viewHolder);
         }
         else {
 
-            viewHolder = (ViewHolder) r.getTag();
+            viewHolder = (RoutesCustomAdapter.ViewHolder) r.getTag();
         }
 
-
-        Picasso.with(context).load(img.get(position))
-                .resize(150,200)
-                .centerCrop()
-                .into(viewHolder.imageView);
         viewHolder.textView.setText(names.get(position));
         return r;
     }
@@ -61,12 +51,11 @@ public class CustomListView extends ArrayAdapter<String> {
     class ViewHolder
     {
         TextView textView;
-       ImageView imageView;
 
         ViewHolder(View v)
         {
-            textView = (TextView) v.findViewById(R.id.textView);
-            imageView = (ImageView) v.findViewById(R.id.imageView);
+            textView =  v.findViewById(R.id.textView);
+
         }
     }
 }
