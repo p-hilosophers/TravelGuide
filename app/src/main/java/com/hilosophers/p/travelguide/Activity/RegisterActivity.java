@@ -19,6 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -72,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(RegisterActivity.this, "You " + response.body().getName() + " successfully made an account !", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
