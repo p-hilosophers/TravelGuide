@@ -19,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("Login");
 
         final EditText email = findViewById(R.id.editTextEmail);
-        final TextInputEditText password = findViewById(R.id.textInputPassword);
+        final EditText password = findViewById(R.id.editTextPassword);
         final Button login = findViewById(R.id.buttonLogin);
         final TextView registerLink = findViewById(R.id.textViewRegisterHere);
 
@@ -59,8 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(LoginActivity.this, "Couldn't establish a connection with the server! Please make sure you have internet access " +
-                                    "and your credentials are correct", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "The inserted e-mail or password is incorrect !", Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{
