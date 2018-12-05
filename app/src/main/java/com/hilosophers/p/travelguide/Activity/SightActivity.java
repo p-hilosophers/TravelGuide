@@ -114,7 +114,6 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-/*
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -123,7 +122,8 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 startActivity(intent);
                 return true;
             }
-        });*/
+        });
+
 
     }
 }

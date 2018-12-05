@@ -14,4 +14,6 @@ public interface SightClient {
     @GET("sights/{sight}/photos")
     Call<List<Photo>> repoForPhotos(@Path("sight") String sight );
 
+
+
 }
