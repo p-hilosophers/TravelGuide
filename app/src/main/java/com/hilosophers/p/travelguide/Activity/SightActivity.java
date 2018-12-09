@@ -1,13 +1,26 @@
 package com.hilosophers.p.travelguide.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,20 +43,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
-public class SightActivity extends FragmentActivity implements OnMapReadyCallback {
+
+public class SightActivity extends FragmentActivity implements OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
     private Button showRoutesBtn;
     private String city;
-    private  Intent intent;
+    private Intent intent;
+    private LocationRequest mLocationRequest;
+    private Double latitude,longitude;
+
+    private long UPDATE_INTERVAL = 10 * 1000;
+    private long FASTEST_INTERVAL = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sights_map);
+        startLocationUpdates();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -51,7 +72,6 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
-
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this,RouteActivity.class);
@@ -59,7 +79,6 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
-
     }
 
 
@@ -76,7 +95,9 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady( final GoogleMap googleMap) {
         mMap = googleMap;
 
-
+        if(checkPermissions()) {
+            googleMap.setMyLocationEnabled(true);
+        }
 
         Retrofit retrofit = RequestService.initializeRequest().build();
         SightClient client = retrofit.create(SightClient.class);
@@ -105,7 +126,6 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 mMap.moveCamera(cu);
                 mMap.animateCamera(cu);
 
-                Toast.makeText(SightActivity.this, "in response", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -114,7 +134,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-/*
+
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -123,9 +143,58 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 startActivity(intent);
                 return true;
             }
-        });*/
-
+        });
     }
+
+        protected void startLocationUpdates(){
+
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mLocationRequest.setInterval(UPDATE_INTERVAL);
+            mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+            builder.addLocationRequest(mLocationRequest);
+            LocationSettingsRequest locationSettingsRequest = builder.build();
+
+            SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+            settingsClient.checkLocationSettings(locationSettingsRequest);
+
+            getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                        @Override
+                        public void onLocationResult(LocationResult locationResult) {
+                            onLocationChanged(locationResult.getLastLocation());
+                        }
+                    },
+                    Looper.myLooper());
+        }
+
+        public void onLocationChanged(Location location) {
+//            // New location has now been determined
+//            String msg = "Updated Location: " +
+//                    Double.toString(location.getLatitude()) + "," +
+//                    Double.toString(location.getLongitude());
+//            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            // You can now create a LatLng Object for use with maps
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        private boolean checkPermissions() {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                requestPermissions();
+                return false;
+            }
+        }
+
+        private void requestPermissions() {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+        }
 }
 
 

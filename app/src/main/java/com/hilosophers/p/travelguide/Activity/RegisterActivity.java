@@ -64,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void sendNetworkRequest(User user) {
-        final TextView text = findViewById(R.id.text);
         Retrofit retrofit = RequestService.initializeRequest().build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);
@@ -72,13 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(RegisterActivity.this, "You " + response.body().getName() + " successfully made an account !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "You " + response.body().getName() + " successfully made an account!", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Something went wrong .", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
             }
         });
     }

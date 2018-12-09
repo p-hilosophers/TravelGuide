@@ -1,6 +1,7 @@
 package com.hilosophers.p.travelguide.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
                             Toast.makeText(LoginActivity.this, "Couldn't establish a connection with the server! Please make sure you have internet access " +
-                                    "and your credentials are correct", Toast.LENGTH_LONG).show();
+                                    "and your credentials are correct !", Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{
