@@ -90,8 +90,9 @@ public class RouteActivity extends AppCompatActivity {
                 uri += "&destination=" + sights.get(0).getLatitude() + "," + sights.get(0).getLongitude() + "&travelmode=walking";
 
                 if(sights.size()>1) {
+                    uri += "&waypoints=";
                     for (int i = 1; i < sights.size(); i++) {
-                        uri += "&waypoints=" + sights.get(i).getLatitude() + "," + sights.get(i).getLongitude();
+                        uri += sights.get(i).getLatitude() + "," + sights.get(i).getLongitude()+"|";
                     }
                 }
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
