@@ -20,7 +20,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("Login");
 
         final EditText email = findViewById(R.id.editTextEmail);
-        final TextInputEditText password = findViewById(R.id.textInputPassword);
+        final TextInputEditText password = findViewById(R.id.inputEditPassword);
         final Button login = findViewById(R.id.buttonLogin);
         final TextView registerLink = findViewById(R.id.textViewRegisterHere);
 
