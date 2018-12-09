@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.hilosophers.p.travelguide.Adapter.RoutesCustomAdapter;
+import com.hilosophers.p.travelguide.Model.Route;
 import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.RouteClient;
@@ -29,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RouteActivity extends AppCompatActivity {
 
@@ -51,12 +53,38 @@ public class RouteActivity extends AppCompatActivity {
         intent = getIntent();
         city = intent.getStringExtra("cityName");
 
+
        Retrofit retrofit = RequestService.initializeRequest().build();
         RouteClient client = retrofit.create(RouteClient.class);
-        Call<List<List<Sight>>> call = client.repoForRoutes(city);
+        Call<Route> call = client.repoForRoutes(city);
 
-        call.enqueue(new Callback<List<List<Sight>>>() {
+        call.enqueue(new Callback<Route>() {
             @Override
+            public void onResponse(Call<Route> call, Response<Route> response) {
+
+                repos = response.body().getRoutes();
+
+                for(List<Sight> sightItem:repos) {
+                    route = "";
+                    sightsList.add((ArrayList<Sight>) sightItem);
+                    for (int i =0;i<sightItem.size();i++) {
+                        route +=sightItem.get(i).getName()+", ";
+                    }
+                    routes.add(route);
+                }
+
+                RoutesCustomAdapter adapter = new RoutesCustomAdapter(RouteActivity.this,routes);
+                routesList.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<Route> call, Throwable t) {
+                Toast.makeText(RouteActivity.this,"error :(",Toast.LENGTH_SHORT).show();
+
+            }
+
+          /*  @Override
             public void onResponse(Call<List<List<Sight>>> call, Response<List<List<Sight>>> response) {
 
                     repos = response.body();
@@ -73,11 +101,11 @@ public class RouteActivity extends AppCompatActivity {
                 RoutesCustomAdapter adapter = new RoutesCustomAdapter(RouteActivity.this,routes);
                 routesList.setAdapter(adapter);
 
-            }
-            @Override
+            }*/
+           /* @Override
             public void onFailure(Call<List<List<Sight>>> call, Throwable t) {
                 Toast.makeText(RouteActivity.this,"error :(",Toast.LENGTH_SHORT).show();
-            }
+            }*/
         });
         routesList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
