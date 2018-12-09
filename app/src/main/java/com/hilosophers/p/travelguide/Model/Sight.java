@@ -1,18 +1,32 @@
 package com.hilosophers.p.travelguide.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Sight {
+public class Sight implements Serializable {
 
 
+    @SerializedName("sightId")
+    @Expose
     private UUID sightId;
 
+    @SerializedName("name")
+    @Expose
     private String name;
 
+    @SerializedName("longitude")
+    @Expose
     private double longitude;
 
+    @SerializedName("latitude")
+    @Expose
     private double latitude;
 
+    @SerializedName("city")
+    @Expose
     private City city;
 
     public Sight(){}

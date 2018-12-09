@@ -72,6 +72,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this,RouteActivity.class);
@@ -79,6 +80,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -126,6 +128,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 mMap.moveCamera(cu);
                 mMap.animateCamera(cu);
 
+                Toast.makeText(SightActivity.this, "in response", Toast.LENGTH_SHORT).show();
             }
 
             @Override
