@@ -3,6 +3,7 @@ package com.hilosophers.p.travelguide.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
 import com.hilosophers.p.travelguide.Services.RequestService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class SightsPhotosActivity extends AppCompatActivity {
         intent = getIntent();
         sight = intent.getStringExtra("sightName");
         listView = findViewById(R.id.sights_photos);
+//        listView.setEmptyView(findViewById(R.id.loadingPanel));
 
 
 
@@ -54,11 +57,12 @@ public class SightsPhotosActivity extends AppCompatActivity {
                 }
                 customListPhotoView = new CustomListPhotoView(SightsPhotosActivity.this,photos);
                 listView.setAdapter(customListPhotoView);
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<Photo>> call, Throwable t) {
-                Toast.makeText(SightsPhotosActivity.this,"Something sent wrong ,please re-try later...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SightsPhotosActivity.this,"Something went wrong, please re-try later...",Toast.LENGTH_SHORT).show();
             }
         });
     }
