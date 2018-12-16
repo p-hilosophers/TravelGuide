@@ -11,4 +11,5 @@
     <string name="register">Register</string>
     <string name="registerHere">"Don't have an account? Register here!"</string>
     <string name="RequiredFields">All fields are required !</string>
+    <string name="title_activity_display_photo">Photo display</string>
 </resources>

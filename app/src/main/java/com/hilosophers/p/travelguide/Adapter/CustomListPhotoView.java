@@ -1,13 +1,20 @@
 package com.hilosophers.p.travelguide.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.hilosophers.p.travelguide.Activity.DisplayPhoto;
+import com.hilosophers.p.travelguide.Activity.SightsPhotosActivity;
+import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +36,7 @@ public class CustomListPhotoView extends ArrayAdapter<String>{
 
     @NonNull
     @Override
-    public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent)
+    public View getView(final int position, @NonNull View convertView, @NonNull ViewGroup parent)
     {
         View r = convertView;
         ViewHolder viewHolderPhoto = null;
@@ -50,20 +57,29 @@ public class CustomListPhotoView extends ArrayAdapter<String>{
                 .resize(150,200)
                 .centerCrop()
                 .into(viewHolderPhoto.imageView);
-       // viewHolderPhoto.textView.setText(names.get(position));
+
+       viewHolderPhoto.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DisplayPhoto.class);
+                intent.putExtra("image_url", img.get(position));
+                context.startActivity(intent);
+
+            }
+        });
         return r;
     }
-
-
     class ViewHolder
     {
 
         ImageView imageView;
 
+
         ViewHolder(View v)
         {
 
             imageView =  v.findViewById(R.id.imageView);
+
         }
     }
 }
