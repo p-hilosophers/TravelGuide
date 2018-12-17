@@ -12,4 +12,7 @@
     <string name="registerHere">"Don't have an account? Register here!"</string>
     <string name="RequiredFields">All fields are required !</string>
     <string name="title_activity_display_photo">Photo display</string>
+    <string name="Loading">Please wait &#8230;</string>
+    <string name="show_routes">Show routes</string>
+
 </resources>

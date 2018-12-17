@@ -27,11 +27,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Show routes"
+            android:text="@string/show_routes"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
-
-
 </FrameLayout>
