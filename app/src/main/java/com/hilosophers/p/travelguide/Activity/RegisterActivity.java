@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void sendNetworkRequest(User user) {
-        final TextView text = findViewById(R.id.text);
+      /*  final TextView text = findViewById(R.id.text);*/
         Retrofit retrofit = RequestService.initializeRequest().build();
         UserClient client = retrofit.create(UserClient.class);
         Call<User> call = client.createAccount(user);

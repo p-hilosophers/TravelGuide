@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CityActivity extends AppCompatActivity {
+public class CityActivity extends AppCompatActivity  {
 
     private List<String> names = new ArrayList<>();
     private List<String> photos = new ArrayList<>();
