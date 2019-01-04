@@ -12,14 +12,17 @@ import android.widget.Toast;
 
 import com.hilosophers.p.travelguide.Authentication.EncryptService;
 import com.hilosophers.p.travelguide.Model.User;
+import com.hilosophers.p.travelguide.Model.Version;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.UserClient;
+import com.hilosophers.p.travelguide.Repository.VersionClient;
 import com.hilosophers.p.travelguide.Services.RequestService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,10 +33,35 @@ public class LoginActivity extends AppCompatActivity {
 
         setTitle("Login");
 
+        final TextView version = findViewById(R.id.version);
         final EditText email = findViewById(R.id.editTextEmail);
         final TextInputEditText password = findViewById(R.id.inputEditPassword);
         final Button login = findViewById(R.id.buttonLogin);
         final TextView registerLink = findViewById(R.id.textViewRegisterHere);
+
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                                .baseUrl("https://api.github.com/")
+                                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        VersionClient client = retrofit.create(VersionClient.class);
+        Call<Version> call = client.getLatestVersion("p-hilosophers","TravelGuide");
+
+        call.enqueue(new Callback<Version>() {
+            @Override
+            public void onResponse(Call<Version> call, Response<Version> response) {
+
+                    Version repo = response.body();
+                    version.setText(repo.getVersion());
+            }
+
+            @Override
+            public void onFailure(Call<Version> call, Throwable t) {
+                    version.setText("version");
+            }
+        });
+
 
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
