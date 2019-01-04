@@ -1,6 +1,7 @@
 package com.hilosophers.p.travelguide.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final TextView version = findViewById(R.id.version);
         final EditText email = findViewById(R.id.editTextEmail);
-        final EditText password = findViewById(R.id.editTextPassword);
+        final TextInputEditText password = findViewById(R.id.inputEditPassword);
         final Button login = findViewById(R.id.buttonLogin);
         final TextView registerLink = findViewById(R.id.textViewRegisterHere);
 
@@ -86,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(LoginActivity.this, "The inserted e-mail or password is incorrect !", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Couldn't establish a connection with the server! Please make sure you have internet access " +
+                                    "and your credentials are correct !", Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{
