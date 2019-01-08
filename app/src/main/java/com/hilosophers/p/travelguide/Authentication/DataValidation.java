@@ -45,7 +45,7 @@ public class DataValidation {
 
     private boolean checkIfEmailIsValid(String email){
         boolean validEmail = false;
-        if(email.contains("@")) {
+        if(email.contains("@") && email.contains(".com")) {
             validEmail = true;
         }
         return  validEmail;
