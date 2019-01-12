@@ -53,7 +53,8 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.RouteActivity"/>
         <activity android:name=".Activity.SightsPhotosActivity"/>
-        <activity android:name=".Activity.DisplayPhoto">
+        <activity android:name=".Activity.DisplayPhoto"/>
+        <activity android:name=".Activity.SightBySeasonActivity">
         </activity>
     </application>
 

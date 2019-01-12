@@ -55,6 +55,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     private Intent intent;
     private LocationRequest mLocationRequest;
     private Double latitude, longitude;
+    private Button seasonButton;
 
     private long UPDATE_INTERVAL = 10 * 1000;
     private long FASTEST_INTERVAL = 2000;
@@ -71,10 +72,20 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+        seasonButton = findViewById(R.id.SeasonButton);
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this, RouteActivity.class);
+                intent.putExtra("cityName", city);
+                startActivity(intent);
+            }
+        });
+
+        seasonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SightActivity.this , SightBySeasonActivity.class);
                 intent.putExtra("cityName", city);
                 startActivity(intent);
             }
@@ -97,6 +108,16 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         if (checkPermissions()) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             googleMap.setMyLocationEnabled(true);
         }
 
@@ -160,7 +181,17 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
         settingsClient.checkLocationSettings(locationSettingsRequest);
-        
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
