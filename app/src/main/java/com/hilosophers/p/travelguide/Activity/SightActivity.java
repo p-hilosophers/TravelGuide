@@ -7,10 +7,12 @@ import android.location.Location;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -46,7 +48,7 @@ import retrofit2.Retrofit;
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
 
-public class SightActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class SightActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
@@ -68,9 +70,12 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        showRoutesBtn = findViewById(R.id.routesBtn);
+
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+
+        /*showRoutesBtn = findViewById(R.id.routesBtn);
+
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -78,7 +83,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 intent.putExtra("cityName", city);
                 startActivity(intent);
             }
-        });
+        }); */
 
     }
 
@@ -145,6 +150,35 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 return true;
             }
         });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.routesBtn) {
+            Intent intent = new Intent(SightActivity.this, RouteActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        } else if (id == R.id.Wikepedia_Search) {
+            Intent intent = new Intent(SightActivity.this, WikiActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        } else if (id == R.id.Back) {
+            Intent intent = new Intent(SightActivity.this, CityActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.Close_App) {
+            finish();
+            moveTaskToBack(true);
+        }
+
+        // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     protected void startLocationUpdates() {
