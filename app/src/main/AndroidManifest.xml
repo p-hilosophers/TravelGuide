@@ -36,7 +36,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBKfRI_wCAqT9ucxtJfRKTBxsWXsoxH1g0" />
+            android:value="AIzaSyAkOmibz_xB8Kf9KWRG5twWzshgsOt1NII" />
 
         <activity
             android:name=".Activity.SightActivity"
