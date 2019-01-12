@@ -29,13 +29,20 @@ public class Sight implements Serializable {
     @Expose
     private City city;
 
+    @SerializedName("season")
+    @Expose
+    private String season;
+
     public Sight(){}
 
-    public Sight(String name, double latitude, double longitude)
+
+
+    public Sight(String name, double latitude, double longitude, String season)
     {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.season = season;
     }
 
     public UUID getSightId() {
@@ -77,6 +84,10 @@ public class Sight implements Serializable {
     public void setCity(City city) {
         this.city = city;
     }
+
+    public String getSeason() { return season; }
+
+    public void setSeason(String season) { this.season = season; }
 
 
 }
