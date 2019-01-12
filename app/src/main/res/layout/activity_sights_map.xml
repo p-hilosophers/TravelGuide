@@ -31,5 +31,13 @@
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/byTimeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ByTime"
+            tools:layout_editor_absoluteX="267dp"
+            tools:layout_editor_absoluteY="455dp" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

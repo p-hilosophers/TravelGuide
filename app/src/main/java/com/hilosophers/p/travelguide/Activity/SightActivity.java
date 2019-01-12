@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -51,6 +49,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
     private Button showRoutesBtn;
+    private Button byTimeButton;
     private String city;
     private Intent intent;
     private LocationRequest mLocationRequest;
@@ -71,6 +70,14 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+
+        byTimeButton = (Button) findViewById(R.id.byTimeButton);
+        byTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openByTime();
+            }
+        });
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -195,6 +202,12 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     1);
+        }
+
+        public void openByTime () {
+            Intent intent = new Intent(this,ByTimeActivity.class);
+            startActivity(intent);
+
         }
 }
 

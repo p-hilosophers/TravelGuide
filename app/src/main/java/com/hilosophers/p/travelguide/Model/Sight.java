@@ -25,17 +25,24 @@ public class Sight implements Serializable {
     @Expose
     private double latitude;
 
+    @SerializedName("dayNight")
+    @Expose
+    private String dayNight;
+
     @SerializedName("city")
     @Expose
     private City city;
 
     public Sight(){}
 
-    public Sight(String name, double latitude, double longitude)
+
+
+    public Sight(String name, double latitude, double longitude, String dayNight)
     {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.dayNight = dayNight;
     }
 
     public UUID getSightId() {
@@ -76,6 +83,13 @@ public class Sight implements Serializable {
 
     public void setCity(City city) {
         this.city = city;
+    }
+    public String getDayNight() {
+        return dayNight;
+    }
+
+    public void setDayNight(String dayNight) {
+        this.dayNight = dayNight;
     }
 
 
