@@ -6,6 +6,9 @@
     <item android:id="@+id/routesBtn"
         android:title="@string/show_routes"
         />
+    <item android:id="@+id/SeasonButton"
+        android:title="@string/Sight_Season"
+        />
 
     <item android:id="@+id/Wikepedia_Search"
         android:title="Wikepedia Search"
