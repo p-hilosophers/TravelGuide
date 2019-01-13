@@ -58,6 +58,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     private LocationRequest mLocationRequest;
     private Double latitude, longitude;
     private Button seasonButton;
+    private Button byTimeButton;
 
     private long UPDATE_INTERVAL = 10 * 1000;
     private long FASTEST_INTERVAL = 2000;
@@ -74,6 +75,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+       byTimeButton = (Button) findViewById(R.id.byTimeButton);
         seasonButton = findViewById(R.id.SeasonButton);
 
         /*showRoutesBtn = findViewById(R.id.routesBtn);
@@ -87,12 +89,23 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         }); */
 
-        seasonButton.setOnClickListener(new View.OnClickListener() {
+        /*seasonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this , SightBySeasonActivity.class);
                 intent.putExtra("cityName", city);
                 startActivity(intent);
+            }
+        });*/
+
+
+        byTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SightActivity.this , ByTimeActivity.class);
+                intent.putExtra("cityName", city);
+                startActivity(intent);
+
             }
         });
 
@@ -172,7 +185,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+       NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -196,6 +209,12 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             finish();
             moveTaskToBack(true);
         }
+        else if (id==R.id.SeasonButton) {
+            Intent intent = new Intent(SightActivity.this, SightBySeasonActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        }
+
 
         // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         // drawer.closeDrawer(GravityCompat.START);

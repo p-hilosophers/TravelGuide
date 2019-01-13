@@ -14,10 +14,10 @@ public class WikiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wiki);
 
-        String name = getIntent().getStringExtra("city");
+        String city = getIntent().getStringExtra("cityName");
 
         WebView wb =(WebView)findViewById(R.id.web);
         wb.setWebViewClient(new WebViewClient());
-        wb.loadUrl("https://en.wikipedia.org/wiki/"+name);
+        wb.loadUrl("https://en.wikipedia.org/wiki/"+city);
     }
 }
