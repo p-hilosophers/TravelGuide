@@ -1,4 +1,4 @@
-package com.hilosophers.p.travelguide.test;
+package com.hilosophers.p.travelguide.Activity;
 
 
 import android.support.test.espresso.DataInteraction;
