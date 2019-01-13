@@ -53,6 +53,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
     private Button showRoutesBtn;
+    private Button byTimeButton;
     private String city;
     private Intent intent;
     private LocationRequest mLocationRequest;
@@ -75,6 +76,14 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         intent = getIntent();
         city = intent.getStringExtra("cityName");
         seasonButton = findViewById(R.id.SeasonButton);
+
+        byTimeButton = (Button) findViewById(R.id.byTimeButton);
+        byTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openByTime();
+            }
+        });
 
         /*showRoutesBtn = findViewById(R.id.routesBtn);
 
@@ -261,6 +270,12 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     1);
         }
+    public void openByTime () {
+        Intent intent = new Intent(this,SightByTimeActivity.class);
+        intent.putExtra("cityName", city);
+        startActivity(intent);
+
+    }
 }
 
 

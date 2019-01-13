@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SightByTimeActivity" >
+
+    <fragment
+        android:id="@+id/timemap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:cameraZoom="10"
+        tools:context=".Activity.SightByTimeActivity" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/radioGroup"
+            android:layout_gravity="center_horizontal">
+
+
+            <RadioButton
+                android:id="@+id/dayButton"
+                android:layout_width="82dp"
+                android:layout_height="wrap_content"
+                android:text="day"
+                android:onClick="rclick"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <RadioButton
+                android:id="@+id/nightButton"
+                android:layout_width="81dp"
+                android:layout_height="wrap_content"
+                android:onClick="rclick"
+                android:text="night"
+
+                tools:layout_editor_absoluteX="14dp"
+                tools:layout_editor_absoluteY="59dp" />
+
+            <RadioButton
+                android:id="@+id/bothButton"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:onClick="rclick"
+                android:text="both"
+
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="103dp" />
+        </RadioGroup>
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
