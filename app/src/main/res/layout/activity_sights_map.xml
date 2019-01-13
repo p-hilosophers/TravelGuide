@@ -35,9 +35,7 @@
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent" />
-
-
-        <Button
+       <Button
             android:id="@+id/SeasonButton"
             android:layout_width="80dp"
             android:layout_height="70dp"
@@ -56,20 +54,8 @@
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="1.0" />
 
-
-        <Button
-            android:id="@+id/byTimeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ByTime"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="455dp"
-            tools:ignore="MissingConstraints" />
-
-    </android.support.constraint.ConstraintLayout>
-
-
+       
+ </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -80,3 +66,8 @@
         app:menu="@menu/drawer_menu_map" />
 
 </android.support.v4.widget.DrawerLayout>
+
+
+
+
+    
