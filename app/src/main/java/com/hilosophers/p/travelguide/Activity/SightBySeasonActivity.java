@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.hilosophers.p.travelguide.Model.Sight;
 import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
-import com.hilosophers.p.travelguide.Repository.SightTimeClient;
+
 import com.hilosophers.p.travelguide.Services.RequestService;
 
 import java.util.ArrayList;
