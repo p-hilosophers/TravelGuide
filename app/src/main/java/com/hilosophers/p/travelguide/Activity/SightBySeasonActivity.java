@@ -66,6 +66,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
 
         rb = (RadioButton) findViewById(radiobuttonid);
         if (rb.getText().equals("Fall")) {
+            if(!fall.isEmpty())
             for (Sight sight : fall) {
                 marker = sMap.addMarker(new MarkerOptions()
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))

@@ -59,7 +59,6 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
     private LocationRequest mLocationRequest;
     private Double latitude, longitude;
     private Button seasonButton;
-    private Button byTimeButton;
 
     private long UPDATE_INTERVAL = 10 * 1000;
     private long FASTEST_INTERVAL = 2000;
@@ -111,7 +110,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         byTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SightActivity.this , ByTimeActivity.class);
+                Intent intent = new Intent(SightActivity.this , SightByTimeActivity.class);
                 intent.putExtra("cityName", city);
                 startActivity(intent);
 
