@@ -93,6 +93,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this, RouteActivity.class);
                 intent.putExtra("cityName", city);
@@ -229,6 +230,18 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             Intent intent = new Intent(SightActivity.this, SightByTimeActivity.class);
             intent.putExtra("cityName",city);
             startActivity(intent);
+        }
+        else if(id==R.id.sortByDistanceBtn){
+            Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
+            intentDistance.putExtra("originsLat",latitude);
+            intentDistance.putExtra("originsLon",longitude);
+            intentDistance.putExtra("cityName",city);
+            SightActivity.this.startActivity(intentDistance);
+        }
+        else if(id==R.id.sortByPopularityBtn){
+            Intent intentPopularity = new Intent(SightActivity.this, PopularityActivity.class);
+            intentPopularity.putExtra("cityName",city);
+            SightActivity.this.startActivity(intentPopularity);
         }
 
 

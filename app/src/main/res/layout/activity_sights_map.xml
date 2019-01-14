@@ -63,6 +63,35 @@
             tools:layout_editor_absoluteY="455dp"
             tools:ignore="MissingConstraints" />
 
+        <Button
+            android:id="@+id/sortByDistanceBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/By_Distance"
+            android:visibility="gone"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toStartOf="@id/SeasonButton"
+            map:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/sortByPopularityBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/By_Popularity"
+            android:visibility="gone"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toStartOf="@id/sortByDistanceBtn"
+            map:layout_constraintStart_toStartOf="parent" />
 
  </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView

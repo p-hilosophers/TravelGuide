@@ -12,6 +12,12 @@
     <item android:id="@+id/byTimeButton"
         android:title="@string/By_time"
         />
+    <item android:id="@+id/sortByDistanceBtn"
+        android:title="@string/By_Distance"
+        />
+    <item android:id="@+id/sortByPopularityBtn"
+        android:title="@string/By_Popularity"
+        />
 
     <item android:id="@+id/Wikepedia_Search"
         android:title="Wikepedia Search"

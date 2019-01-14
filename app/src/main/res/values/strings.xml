@@ -16,6 +16,7 @@
     <string name="show_routes">Show routes</string>
     <string name="Sight_Season">Sights by season</string>
     <string name="By_time">Sights by time</string>
-
+    <string name="By_Distance">Sort by Distance</string>
+    <string name="By_Popularity">Sort by Popularity</string>
     <string name="title_activity_distance">DistanceActivity</string>
 </resources>
