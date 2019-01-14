@@ -1,8 +1,10 @@
 package com.hilosophers.p.travelguide.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SightsPhotosActivity extends AppCompatActivity {
+public class SightsPhotosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
     private List<String> photos = new ArrayList<>();
@@ -65,6 +67,34 @@ public class SightsPhotosActivity extends AppCompatActivity {
                 Toast.makeText(SightsPhotosActivity.this,"Something went wrong, please re-try later...",Toast.LENGTH_SHORT).show();
             }
         });
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.Wikepedia_Search) {
+            Intent intent = new Intent(SightsPhotosActivity.this, WikiActivity.class);
+            String city = getIntent().getStringExtra("sightName");
+            intent.putExtra("sightName", city);
+            startActivity(intent);
+
+        } else if (id == R.id.Back) {
+            Intent intent = new Intent(SightsPhotosActivity.this, SightActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.Close_App) {
+            finish();
+            moveTaskToBack(true);
+        }
+
+
+
+        // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
 

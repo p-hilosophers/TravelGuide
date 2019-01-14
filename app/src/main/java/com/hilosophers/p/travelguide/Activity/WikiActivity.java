@@ -16,8 +16,15 @@ public class WikiActivity extends AppCompatActivity {
 
         String city = getIntent().getStringExtra("cityName");
 
+        String cityy = getIntent().getStringExtra("sightName");
+
         WebView wb =(WebView)findViewById(R.id.web);
         wb.setWebViewClient(new WebViewClient());
-        wb.loadUrl("https://en.wikipedia.org/wiki/"+city);
+        if (city!=null) {
+            wb.loadUrl("https://en.wikipedia.org/wiki/"+city);
+        }else{
+            wb.loadUrl("https://en.wikipedia.org/wiki/"+cityy);
+        }
+
     }
 }
