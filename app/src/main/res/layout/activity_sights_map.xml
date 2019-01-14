@@ -63,7 +63,7 @@
             tools:layout_editor_absoluteY="455dp"
             tools:ignore="MissingConstraints" />
 
-       
+
  </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -79,4 +79,3 @@
 
 
 
-    

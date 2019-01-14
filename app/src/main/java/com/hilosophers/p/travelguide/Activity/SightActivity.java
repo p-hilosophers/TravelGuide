@@ -37,6 +37,9 @@ import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
 import com.hilosophers.p.travelguide.Services.RequestService;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

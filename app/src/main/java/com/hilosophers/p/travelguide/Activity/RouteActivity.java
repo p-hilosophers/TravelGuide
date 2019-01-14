@@ -112,7 +112,7 @@ public class RouteActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String uri = "https://www.google.com/maps/dir/?api=1&origin=Current+Location";
+                String uri = "https://www.google.com/maps/dir/?api=1&origin=Current+Position";
                 List<Sight> sights = sightsList.get(position);
                 //TO DO sort by distance
                 uri += "&destination=" + sights.get(0).getLatitude() + "," + sights.get(0).getLongitude() + "&travelmode=walking";
