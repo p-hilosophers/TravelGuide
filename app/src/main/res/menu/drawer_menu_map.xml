@@ -9,6 +9,9 @@
     <item android:id="@+id/SeasonButton"
         android:title="@string/Sight_Season"
         />
+    <item android:id="@+id/byTimeButton"
+        android:title="@string/By_time"
+        />
 
     <item android:id="@+id/Wikepedia_Search"
         android:title="Wikepedia Search"

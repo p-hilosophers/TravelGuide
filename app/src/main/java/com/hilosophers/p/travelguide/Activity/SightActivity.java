@@ -222,6 +222,11 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             intent.putExtra("cityName", city);
             startActivity(intent);
         }
+        else if(id==R.id.byTimeButton){
+            Intent intent = new Intent(SightActivity.this, SightByTimeActivity.class);
+            intent.putExtra("cityName",city);
+            startActivity(intent);
+        }
 
 
         // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
