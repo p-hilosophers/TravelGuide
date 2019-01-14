@@ -37,6 +37,9 @@ import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
 import com.hilosophers.p.travelguide.Services.RequestService;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +76,8 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+//        final Button distanceCalculation = findViewById(R.id.button);
+//        showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
        byTimeButton = (Button) findViewById(R.id.byTimeButton);
@@ -90,6 +95,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this, RouteActivity.class);
                 intent.putExtra("cityName", city);
@@ -116,6 +122,17 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
             }
         });
+
+//        distanceCalculation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
+//                intentDistance.putExtra("originsLat",latitude);
+//                intentDistance.putExtra("originsLon",longitude);
+//                intentDistance.putExtra("cityName",city);
+//                SightActivity.this.startActivity(intentDistance);
+//            }
+//        });
 
     }
 

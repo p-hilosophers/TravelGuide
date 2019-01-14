@@ -3,7 +3,7 @@ package com.hilosophers.p.travelguide.Authentication;
 public class DataValidation {
     private String message="";
 
-    private boolean checkIfPasswordsMatch(String pass , String conPass){
+    public boolean checkIfPasswordsMatch(String pass , String conPass){
         boolean match = false;
         if(pass.equals(conPass)) {
             match = true;
@@ -11,7 +11,7 @@ public class DataValidation {
         return match;
     }
 
-    private boolean checkIfPasswordIsStrong(String pass){
+    public boolean checkIfPasswordIsStrong(String pass){
         boolean strongPass = false;
         if(pass.length() >= 6) {
             strongPass = true;
@@ -19,7 +19,7 @@ public class DataValidation {
         return strongPass;
     }
 
-    private boolean checkIfPasswordIsNull(String pass){
+    public boolean checkIfPasswordIsNull(String pass){
         boolean nullPass = false;
         if(pass.isEmpty()) {
             nullPass = true;
@@ -27,7 +27,7 @@ public class DataValidation {
         return  nullPass;
     }
 
-    private boolean checkIfNameIsNull(String name){
+    public boolean checkIfNameIsNull(String name){
         boolean nullName = false;
         if(name.isEmpty()) {
             nullName = true;
@@ -35,7 +35,7 @@ public class DataValidation {
         return  nullName;
     }
 
-    private boolean checkIfSurnameIsNull(String surname){
+    public boolean checkIfSurnameIsNull(String surname){
         boolean nullName = false;
         if(surname.isEmpty()) {
             nullName = true;
@@ -43,9 +43,9 @@ public class DataValidation {
         return  nullName;
     }
 
-    private boolean checkIfEmailIsValid(String email){
+    public boolean checkIfEmailIsValid(String email){
         boolean validEmail = false;
-        if(email.contains("@") && email.contains(".com")) {
+        if(email.contains("@") && email.contains(".")) {
             validEmail = true;
         }
         return  validEmail;
