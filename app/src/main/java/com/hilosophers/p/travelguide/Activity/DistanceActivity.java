@@ -34,7 +34,9 @@ public class DistanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_distance);
+        setTitle("Sorted from closest to furthest");
         sortedDistanceList = findViewById(R.id.distanceList);
+
         intent = getIntent();
         originsLat = intent.getDoubleExtra("originsLat", 0);
         originsLon = intent.getDoubleExtra("originsLon", 0);

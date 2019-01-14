@@ -55,8 +55,9 @@
         <activity android:name=".Activity.SightsPhotosActivity" />
         <activity android:name=".Activity.DisplayPhoto" />
         <activity android:name=".Activity.WikiActivity" />
-        <activity android:name=".Activity.SightByTimeActivity"></activity>
-        <activity android:name=".Activity.DistanceActivity"></activity>
+        <activity android:name=".Activity.SightByTimeActivity" />
+        <activity android:name=".Activity.DistanceActivity" />
+        <activity android:name=".Activity.PopularityActivity"></activity>
     </application>
 
 </manifest>

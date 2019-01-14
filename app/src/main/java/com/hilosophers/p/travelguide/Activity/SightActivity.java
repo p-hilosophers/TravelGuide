@@ -76,7 +76,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        final Button distanceCalculation = findViewById(R.id.button);
+//        final Button distanceCalculation = findViewById(R.id.sortByDistanceButton);
 //        showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
@@ -243,6 +243,18 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
             Intent intent = new Intent(SightActivity.this, SightByTimeActivity.class);
             intent.putExtra("cityName",city);
             startActivity(intent);
+        }
+        else if(id==R.id.sortByDistanceBtn){
+            Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
+            intentDistance.putExtra("originsLat",latitude);
+            intentDistance.putExtra("originsLon",longitude);
+            intentDistance.putExtra("cityName",city);
+            SightActivity.this.startActivity(intentDistance);
+        }
+        else if(id==R.id.sortByPopularityBtn){
+            Intent intentPopularity = new Intent(SightActivity.this, PopularityActivity.class);
+            intentPopularity.putExtra("cityName",city);
+            SightActivity.this.startActivity(intentPopularity);
         }
 
 
