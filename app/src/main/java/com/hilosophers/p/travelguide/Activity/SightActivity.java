@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -35,6 +33,9 @@ import com.hilosophers.p.travelguide.R;
 import com.hilosophers.p.travelguide.Repository.SightClient;
 import com.hilosophers.p.travelguide.Services.RequestService;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
-
 
 public class SightActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -68,15 +68,28 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        final Button distanceCalculation = findViewById(R.id.button);
         showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SightActivity.this, RouteActivity.class);
                 intent.putExtra("cityName", city);
                 startActivity(intent);
+            }
+        });
+
+        distanceCalculation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
+                intentDistance.putExtra("originsLat",latitude);
+                intentDistance.putExtra("originsLon",longitude);
+                intentDistance.putExtra("cityName",city);
+                SightActivity.this.startActivity(intentDistance);
             }
         });
 
@@ -164,7 +177,7 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                        onLocationChanged(locationResult.getLastLocation());
+                            onLocationChanged(locationResult.getLastLocation());
                     }
                 },
                 Looper.myLooper());
@@ -172,13 +185,14 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
         public void onLocationChanged(Location location) {
 //            // New location has now been determined
-//            String msg = "Updated Location: " +
+//            String msg = "Updated Position: " +
 //                    Double.toString(location.getLatitude()) + "," +
 //                    Double.toString(location.getLongitude());
 //            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             // You can now create a LatLng Object for use with maps
             latitude = location.getLatitude();
             longitude = location.getLongitude();
+
         }
 
         private boolean checkPermissions() {
