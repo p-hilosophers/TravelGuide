@@ -3,8 +3,13 @@
 buildscript {
     
     repositories {
-        google()
+        maven {
+            url 'https://maven.google.com'
+        }
         jcenter()
+        google()
+        maven { url 'https://maven.fabric.io/public' }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -17,9 +22,12 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         jcenter()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
+
 }
 
 task clean(type: Delete) {

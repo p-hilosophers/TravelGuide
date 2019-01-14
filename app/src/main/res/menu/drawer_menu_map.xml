@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:id="@+id/routesBtn"
+        android:title="@string/show_routes"
+        />
+    <item android:id="@+id/SeasonButton"
+        android:title="@string/Sight_Season"
+        />
+    <item android:id="@+id/byTimeButton"
+        android:title="@string/By_time"
+        />
+
+    <item android:id="@+id/Wikepedia_Search"
+        android:title="Wikepedia Search"
+        android:icon="@drawable/ic_search_black_24dp"
+        />
+
+    <item android:id="@+id/Back"
+        android:title="Back"
+        android:icon="@drawable/ic_arrow_back_black_24dp"
+        />
+    <item android:id="@+id/Close_App"
+        android:title="Close App"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        />
+
+</menu>

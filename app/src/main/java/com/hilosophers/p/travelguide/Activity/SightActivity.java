@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -46,15 +50,18 @@ import retrofit2.Retrofit;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
-public class SightActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+
+public class SightActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
     private List<Sight> sightlist = new ArrayList<>();
     private Button showRoutesBtn;
+    private Button byTimeButton;
     private String city;
     private Intent intent;
     private LocationRequest mLocationRequest;
     private Double latitude, longitude;
+    private Button seasonButton;
 
     private long UPDATE_INTERVAL = 10 * 1000;
     private long FASTEST_INTERVAL = 2000;
@@ -68,10 +75,24 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        final Button distanceCalculation = findViewById(R.id.button);
-        showRoutesBtn = findViewById(R.id.routesBtn);
+
+//        final Button distanceCalculation = findViewById(R.id.button);
+//        showRoutesBtn = findViewById(R.id.routesBtn);
         intent = getIntent();
         city = intent.getStringExtra("cityName");
+       byTimeButton = (Button) findViewById(R.id.byTimeButton);
+        seasonButton = findViewById(R.id.SeasonButton);
+
+        byTimeButton = (Button) findViewById(R.id.byTimeButton);
+        byTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openByTime();
+            }
+        });
+
+        /*showRoutesBtn = findViewById(R.id.routesBtn);
+
 
         showRoutesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,18 +101,38 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 intent.putExtra("cityName", city);
                 startActivity(intent);
             }
-        });
+        }); */
 
-        distanceCalculation.setOnClickListener(new View.OnClickListener() {
+        /*seasonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
-                intentDistance.putExtra("originsLat",latitude);
-                intentDistance.putExtra("originsLon",longitude);
-                intentDistance.putExtra("cityName",city);
-                SightActivity.this.startActivity(intentDistance);
+                Intent intent = new Intent(SightActivity.this , SightBySeasonActivity.class);
+                intent.putExtra("cityName", city);
+                startActivity(intent);
+            }
+        });*/
+
+
+        byTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SightActivity.this , SightByTimeActivity.class);
+                intent.putExtra("cityName", city);
+                startActivity(intent);
+
             }
         });
+
+//        distanceCalculation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intentDistance = new Intent(SightActivity.this, DistanceActivity.class);
+//                intentDistance.putExtra("originsLat",latitude);
+//                intentDistance.putExtra("originsLon",longitude);
+//                intentDistance.putExtra("cityName",city);
+//                SightActivity.this.startActivity(intentDistance);
+//            }
+//        });
 
     }
 
@@ -110,6 +151,16 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         if (checkPermissions()) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             googleMap.setMyLocationEnabled(true);
         }
 
@@ -158,6 +209,46 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                 return true;
             }
         });
+
+       NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.routesBtn) {
+            Intent intent = new Intent(SightActivity.this, RouteActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        } else if (id == R.id.Wikepedia_Search) {
+            Intent intent = new Intent(SightActivity.this, WikiActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        } else if (id == R.id.Back) {
+            Intent intent = new Intent(SightActivity.this, CityActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.Close_App) {
+            finish();
+            moveTaskToBack(true);
+        }
+        else if (id==R.id.SeasonButton) {
+            Intent intent = new Intent(SightActivity.this, SightBySeasonActivity.class);
+            intent.putExtra("cityName", city);
+            startActivity(intent);
+        }
+        else if(id==R.id.byTimeButton){
+            Intent intent = new Intent(SightActivity.this, SightByTimeActivity.class);
+            intent.putExtra("cityName",city);
+            startActivity(intent);
+        }
+
+
+        // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     protected void startLocationUpdates() {
@@ -173,11 +264,21 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
         settingsClient.checkLocationSettings(locationSettingsRequest);
-        
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                            onLocationChanged(locationResult.getLastLocation());
+                        onLocationChanged(locationResult.getLastLocation());
                     }
                 },
                 Looper.myLooper());
@@ -185,14 +286,13 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
 
         public void onLocationChanged(Location location) {
 //            // New location has now been determined
-//            String msg = "Updated Position: " +
+//            String msg = "Updated Location: " +
 //                    Double.toString(location.getLatitude()) + "," +
 //                    Double.toString(location.getLongitude());
 //            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             // You can now create a LatLng Object for use with maps
             latitude = location.getLatitude();
             longitude = location.getLongitude();
-
         }
 
         private boolean checkPermissions() {
@@ -210,6 +310,12 @@ public class SightActivity extends FragmentActivity implements OnMapReadyCallbac
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     1);
         }
+    public void openByTime () {
+        Intent intent = new Intent(this,SightByTimeActivity.class);
+        intent.putExtra("cityName", city);
+        startActivity(intent);
+
+    }
 }
 
 

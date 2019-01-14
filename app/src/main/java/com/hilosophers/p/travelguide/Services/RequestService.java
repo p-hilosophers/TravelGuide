@@ -6,7 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestService {
 
+
     private static String url = "http://35.204.237.100:8081/";
+                //"http://35.204.237.100:8081/";
 
     public static Retrofit.Builder initializeRequest()
     {

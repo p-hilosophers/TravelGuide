@@ -10,18 +10,18 @@ public class Photo {
     private double longitude;
 
     private double latitude;
-    private String image;
+    private String imageUrl;
     private Sight sight;
 
 
     public Photo(){}
 
-    public Photo(UUID idPhoto, String name, double longitude, double latitude, String image) {
+    public Photo(UUID idPhoto, String name, double longitude, double latitude, String imageUrl) {
         this.idPhoto = idPhoto;
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.image = image;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -35,11 +35,11 @@ public class Photo {
     }
 
     public String getImage() {
-        return image;
+        return imageUrl;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.imageUrl = image;
     }
 
 
