@@ -17,5 +17,6 @@ public interface SortClient {
 
     @GET("popularitySort/{cityName}")
     Call<List<PopularityRo>> getPopularityList(@Path("cityName") String cityName);
+    
 
 }
