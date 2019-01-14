@@ -70,31 +70,36 @@ public class SightByTimeActivity extends AppCompatActivity implements OnMapReady
         int radiobuttonid = rg.getCheckedRadioButtonId();
         Marker marker;
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        int count=0;
 
         rb=(RadioButton) findViewById(radiobuttonid);
         if (rb.getText().equals("day")){
             for (Sight sight : day){
                 marker=map.addMarker(new MarkerOptions().position(new LatLng(sight.getLatitude(),sight.getLongitude())).title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         }
         else if (rb.getText().equals("night")){
             for (Sight sight : night){
                 marker=map.addMarker(new MarkerOptions().position(new LatLng(sight.getLatitude(),sight.getLongitude())).title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         }
         else if (rb.getText().equals("both")){
             for (Sight sight : both){
                 marker=map.addMarker(new MarkerOptions().position(new LatLng(sight.getLatitude(),sight.getLongitude())).title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         }
+        if(count>0){
         LatLngBounds bounds = builder.build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds,5);
         map.moveCamera(cameraUpdate);
         map.animateCamera(cameraUpdate);
-    }
+    }}
 
 
 

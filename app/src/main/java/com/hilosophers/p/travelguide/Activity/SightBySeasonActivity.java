@@ -63,6 +63,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
         int radiobuttonid = rg.getCheckedRadioButtonId();
         Marker marker;
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        int count=0;
 
         rb = (RadioButton) findViewById(radiobuttonid);
         if (rb.getText().equals("Fall")) {
@@ -72,6 +73,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))
                         .title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         } else if (rb.getText().equals("Winter")) {
             for (Sight sight : winter) {
@@ -79,6 +81,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))
                         .title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
 
         } else if (rb.getText().equals("Spring")) {
@@ -87,6 +90,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))
                         .title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         } else if (rb.getText().equals("Summer")) {
             for (Sight sight : summer) {
@@ -94,6 +98,7 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))
                         .title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         } else {
             for (Sight sight : multiseason) {
@@ -101,15 +106,18 @@ public class SightBySeasonActivity extends AppCompatActivity implements OnMapRea
                         .position(new LatLng(sight.getLatitude(), sight.getLongitude()))
                         .title(sight.getName()));
                 builder.include(marker.getPosition());
+                count ++;
             }
         }
 
         Toast.makeText(getBaseContext(), rb.getText(), Toast.LENGTH_LONG).show();
 
-        LatLngBounds bounds = builder.build();
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 5);
-        sMap.moveCamera(cu);
-        sMap.animateCamera(cu);
+        if(count>0) {
+            LatLngBounds bounds = builder.build();
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 5);
+            sMap.moveCamera(cu);
+            sMap.animateCamera(cu);
+        }
     }
 
       @Override
