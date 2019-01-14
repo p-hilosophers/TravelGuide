@@ -15,5 +15,6 @@
     <string name="Loading">Please wait &#8230;</string>
     <string name="show_routes">Show routes</string>
     <string name="Sight_Season">Sights by season</string>
+    <string name="By_time">Sights by time</string>
 
 </resources>
